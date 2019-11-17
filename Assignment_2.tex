@@ -39,7 +39,7 @@
 
 %--------------------------------------------------------
 %   IMPORTANT: Specify your Student ID below [You will need to uncomment the line, else compilation will fail]. Make sure to specify your student ID correctly, otherwise we may not be able to identify your work and you will be marked as missing.
-%\newcommand{\assignmentAuthorName}{s1234567}
+%\newcommand{\assignmentAuthorName}{s6666666}
 %--------------------------------------------------------
 
 \begin{document}
@@ -68,7 +68,8 @@
 
 
 \answerbox{12em}{
-Your Answer Here
+From the columns in the train set, we can see that every feature is a word's term frequency value in a sample, so all the values of features will be in [0,1] and typical value will be 0.  \\
+The train set has 5648 samples and 1001 columns. What's more, it has 1000 features and 1 label. As for label, there has 8 classes and 7 classes' number is about 740 while class 7 only have 471 samples. However, some samples only have a 1 without any values is not 0 which means the sample only have one word. That's strange.
 }
 
 
@@ -80,7 +81,7 @@ Your Answer Here
 
 
 \answerbox{10em}{
-Your Answer Here
+By loading the test set we can see that the test set has 1883 and 1001 columns. The test set has the same features as train set and test set's feature data ranges and distributions. As for label, there also has 8 classes and 7 classes' number is about 240 while class 7 only have 157 samples. This represents that the test set has the same distribution with train set and we can predict test set effectively by learning train set.
 }
 
 
@@ -92,7 +93,7 @@ Your Answer Here
 
 
 \answerbox{10em}{
-Your Answer Here
+When we just use the frequency of times a word appears in a document as a feature, there is a problem: some word like "is" will have a high frequency but they don't distinguish the document from others because other documents will have high values for these words too. So, we must decrease the influence of these words and take idf into account. If a word is common, it will appear in many documents thus has a low idf value. So the tf-idf value will be low too and it will not has big influence on our performance.
 }
 
 
@@ -117,7 +118,8 @@ Your Answer Here
 
 
 \answerbox{8em}{
-Your Answer Here
+Because kMeans must choose k centroids, and different initialization of centroids will affect the performance. So it is highly dependent on the initialization of the centroids. \\
+As a result, the algorithm is often done several times with different initialization of the centroids. What's more, scikit-learn implement a k-means++ initial scheme to initialize the centroids to be (generally) distant from each other.
 }
 
 
@@ -130,7 +132,7 @@ Your Answer Here
 
 
 \answerbox{5em}{
-Your Answer Here
+In my opinion, the number is 8. There are only 8 classes and choosing the number of clusters as 8 may cluster the data appropriately.
 }
 
 
@@ -143,7 +145,9 @@ Your Answer Here
 
 
 \answerbox{16em}{
-Your Answer Here
+1. MI can be expressed as $I(X;Y)=H(X)+H(Y)-H(X,Y)$, in which $H$ refer to entropy.  \\
+2. Intuitively, mutual information measures the information that $X$ and $Y$ share: It measures how much knowing one of these variables reduces uncertainty about the other. So, it can measure similarity between two labels of the same data. \\
+3. Because MI is independent of the absolute values of the labels:  a permutation of the class or cluster label values won’t change the score value in any way, so it can be used to evaluate cluster result. However, MI have some shortcomings: MI's max value isn't 1, which is therefore harder to judge; when prediction get independent labels, the MI will reach the max value too. But we have 1883 test data and only 8 classes, so we won't get independent labels and can use MI to evaluate.
 }
 
 
@@ -155,7 +159,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_7.jpg}
+\end{center}
 }
 
 
@@ -167,7 +173,8 @@ Your Image Here
 
 
 \answerbox{10em}{
-Your Answer Here
+We can see that: as the number of n\_clusters increases, the AMI of cluster result increases too. However, when n\_clusters = 9, the AMI get the highest value. Then, AMI begins to decrease. \\
+So, the result is very close to my expectation because my expectant number is 8. There only has a difference of 1.
 }
 
 
@@ -179,7 +186,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_8.jpg}
+\end{center}
 }
 
 
@@ -191,7 +200,11 @@ Your Image Here
 
 
 \answerbox{14em}{
-Your Answer Here
+From the image we can see that: When the n\_clusters=4, the clustering result isn't good. 
+For cluster 0, 1258 data-points are assigned to it. In which, the major data-points is from class 0 and 1. And data-points from 5 also have a significant proportion. 
+For cluster 1 and 2, the cluster result is not bad. The major class of cluster 1 is class 4, and the major class of cluster 2 is class 6. \\
+However, for cluster 3, the result is very disappointing. It contains data-points from all the classes and all the classes' data-points have a significant proportion. \\
+So, the main problem is that the number of clusters is so small that KMeans algorithm can not find appropriate cluster for all the classes. Thus, increasing the number of n\_clusters may get better performance. Obviously, it conform the observations in Question\ref{Q_UNSUP_LEARN}:\ref{Q_CLUSTER_TRENDS}.
 }
 
 
@@ -215,7 +228,8 @@ Your Answer Here
 
 
 \answerbox{8em}{
-Your Answer Here
+First give the expression of F1 score: $F1 = 2*\frac{P*R}{P+R}$, in which P is precision and R is recall. We can see that F1 score take both precision and recall into account. Only if precision and recall are high, F1 score can be a high value. So, using it is preferable to accuracy.   \\
+As for macro-average method, it calculate metrics for each label, and find their unweighted mean. This does not take label imbalance into account.
 }
 
 
@@ -228,7 +242,8 @@ Your Answer Here
 
 
 \answerbox{8em}{
-Your Answer Here
+To define a baseline model, I choose a random guess machine. Because without any prior knowledge of the dataset, what we can do is just do random guess. And with random guess, then we can see how much better our model do comparing to the case that we don't learn anything from dataset. So, the base line is $f(x)=R(class)$, in which R means random choosing. \\
+So, the F1 score of baseline on testing set is 0.127, which is a bad performance.
 }
 
 
@@ -240,7 +255,7 @@ Your Answer Here
 
 
 \answerbox{9em}{
-Your Answer Here
+As we all known, Logistic Regression is a binary classification method. To solve a multi-class class, SKlearn uses the one-vs-rest (OvR) scheme. For every class in the task, there will be a classifier to classify whether a sample belongs to this class. Then, combine all the results for every class we can get a final multi-class classification result.
 }
 
 
@@ -252,7 +267,9 @@ Your Answer Here
 
 
 \answerbox{9em}{
-Your Answer Here
+The average validation-set F1-score is 0.669. \\
+The standard deviation of validation-set F1-score is 0.017. \\
+So, we can see that though Logistic Regression is a simple model, it can learn knowledge from dataset and do much better than random guess.
 }
 
 
@@ -264,7 +281,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_9.jpg}
+\end{center}
 }
 
 
@@ -276,7 +295,8 @@ Your Image Here
 
 
 \answerbox{11em}{
-Your Answer Here
+The optimal C value is 1 which is chose by performance on validation set. When C=1, the average F1-score on training set is 0.817, and it's 0.669 on validation set.   \\
+Actually, the C is inverse of regularization strength. So, when C is small, the Logistic Model must be very simple and can not learn enough knowledge from dataset and perform bad on both two sets. Thus, increasing C make model do better. However, when C is too big that model can learn complicated function from training set which is not  appropriate for validation set. Thus, the model will do perfect on training set while performance on validation set will worse than it on training set.
 }
 
 
@@ -288,7 +308,7 @@ Your Answer Here
 
 
 \answerbox{7em}{
-Your Answer Here
+The F1-score on test-set of best model is 0.675. And the best model's F1-score on validation set is 0.669. So, the F1-scores is very close which shows that the parameters we set make the model have a low variance and have strong generalization ability.
 }
 
 
@@ -328,7 +348,8 @@ Your Answer Here
 
 
 \answerbox{13em}{
-Your Answer Here
+After read the csv, we can get that there are 18 site and every record have 3 main features: NOx, NO and NO2. And the total number of records is 1306758.  
+Then we can see that the info about NOx, which represents the together as oxides of nitrogen. The NOx feature has 1191220 records, the other is null. And there also has 85 negative values which may represent some errors. From the histogram of this feature, the main range of NOx is from zero to 1000. The NO2 feature has 1188426 records and 98 negative values.And the main range of NO2 feature is from zero to 200. The NO feature has 1197536 records and 542 negative values. main range is from 0 to 600. 
 }
 
 
@@ -341,7 +362,21 @@ as having missing data, and similarly for negative entries. \hint{Pandas has a h
 
 
 \answerbox{17em}{
-Your Table Here
+\begin{tabular}{rrrrrrrr}
+\toprule
+ SiteID &   Count &  Negative &   Missing & SiteID &   Count &  Negative &   Missing \\
+\midrule
+      0 &    6446 &  0.000000 &  0.016134 &  9 &   22071 &  0.000000 &  0.053011 \\
+      1 &  163111 &  0.000000 &  0.062902 & 10 &   96407 &  0.000041 &  0.035900 \\
+      2 &   62990 &  0.000048 &  0.043483 & 11 &   20693 &  0.000870 &  0.019040 \\
+      3 &   25464 &  0.007776 &  0.773327 & 12 &   45240 &  0.000000 &  0.174845 \\
+      4 &   74787 &  0.000053 &  0.020685 & 13 &   12423 &  0.000161 &  0.514610 \\
+      5 &  113952 &  0.000000 &  0.088283 & 14 &  113951 &  0.000000 &  0.105317 \\
+      6 &  142141 &  0.000028 &  0.074440 & 15 &    2712 &  0.000000 &  1.000000 \\
+      7 &  115162 &  0.002779 &  0.041950 & 16 &  154331 &  0.000136 &  0.065308 \\
+      8 &   43824 &  0.000000 &  0.210570 & 17 &   91053 &  0.000022 &  0.062711 \\
+\bottomrule
+\end{tabular}
 }
 
 
@@ -353,7 +388,7 @@ Your Table Here
 
 
 \answerbox{11em}{
-Your Answer Here
+It's obvious that the negative values' percentage is very low from the question 4.1. And from the table in Question 4.2, we can see that the numbers of records at different sites range from 2712 to 163111. So, the records on different site have significant number differences. What's more, almost sites' records has a low percentage of missing values. However, at site 3, 13 and 15, there are 0.773, 0.515 and 1.000 respectively. So, these sites' records have less information.
 }
 
 
@@ -365,7 +400,15 @@ Your Answer Here
 
 
 \answerbox{10em}{
-Your Table Here
+\begin{tabular}{lrrr}
+\toprule
+{} &   NOx &   NO2 &    NO \\
+\midrule
+NOx & 1.000 & 0.878 & 0.988 \\
+NO2 & 0.878 & 1.000 & 0.808 \\
+NO  & 0.988 & 0.808 & 1.000 \\
+\bottomrule
+\end{tabular}
 }
 
 
@@ -377,7 +420,8 @@ Your Table Here
 
 
 \answerbox{7em}{
-Your Answer Here
+First, we can see that the correlation coefficient of NOx and NO2 is 0.878. However, the coefficient of NOx and NO is 0.988. Actually, from the main range of feature we can explain: the range of NO is larger than the range of NO2, so NO's value contributes more to NOx.
+Second, the coefficient of NO and NO2 is 0.808, which show that NO and NO2 is related, but is not as strong as NOx with NO2 or NO.
 }
 
 
@@ -391,7 +435,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_1.jpg}
+\end{center}
 }
 
 
@@ -403,7 +449,8 @@ Your Image Here
 
 
 \answerbox{12em}{
-Your Answer Here
+First, we observe the heat-map of the NO gas. So, site 1, 2, 10, 16 and 17 have several high Pearson correlation coefficient (>=0.7) with other site. Maybe they are site which are in the middle location. What's more, site 6, 7, 12 and 14 nearly have no related site. And pair of site 7 and 14 has the lowest coefficient which is 0.35.\\
+Then, we can see that the same rule can be found in the other gases. To be exact, not the same, but very like.
 }
 
 
@@ -426,7 +473,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_2.jpg}
+\end{center}
 }
 
 
@@ -440,7 +489,9 @@ Your Image Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_3.jpg}
+\end{center}
 }
 
 
@@ -452,7 +503,10 @@ Your Image Here
 
 
 \answerbox{9em}{
-Your Answer Here
+So, we have gotten the figure about PCA information and get some result:\\
+1. The variance of first component is the largest, and it's ratio of the variance explained is 0.589; \\
+2. First 10 components' sum value of variance explained exceeds 0.95, which means that the first 10 components have the nearly all of the information.\\
+3. The components after serial number 30 have very low variance.
 }
 
 
@@ -465,7 +519,9 @@ Your Answer Here
 
 
 \answerbox{50em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=0.9\textwidth] {Figure/Figure_4.jpg}
+\end{center}
 }
 
 
@@ -477,7 +533,9 @@ Your Image Here
 
 
 \answerbox{16em}{
-Your Answer Here
+Focus on the mean and first principal component, we can see that both of them have similar pattern. At 9 oclock and 18 oclock, there are peaks of NOx and NO both in mean and first principal component. It's obviously that it's related to the car usage throughout the day because at these times, car is highly used.\\
+However, there also has some difference. In the mean's plot, the peak at 18 oclock is obvious, however, the peak at 18 oclock of the first component is not clear.\\
+Then, we only talk about the principal components. However, the pattern between the components has a big difference. In the second principal component, a valley happened at 7 oclock while there is a peak at 8 oclock in first component. What's more, the peak at 18 oclock in the first principal component is delayed by about an hour in the second principal component. Maybe the original data is not highly linearly correlated, so PCA cannot performe well in second components.
 }
 
 
@@ -501,7 +559,9 @@ Your Answer Here
 
 
 \answerbox{4em}{
-Your Answer Here
+The size of training set is 8937.
+The size of validation set is 2234.
+The size of testing set is 3724.
 }
 
 
@@ -513,7 +573,8 @@ Your Answer Here
 
 
 \answerbox{8em}{
-Your Answer Here
+Because of the only using of $y$-values, we can only define a baseline $f(y)=a$, $a$ is a constant. To find this constant, I use gradient descent method $a_j=a_{j-1}-\alpha\frac{1}{n}\sum_{i=1}^n 2*(a_{j-1}-y_i)$ to find the optimal a. The final result is $a=98.3206$, which is equal to the mean of the training set. \\
+The RMSE on training set is 6354.30, while on validation set is 6432.84.
 }
 
 
@@ -525,7 +586,9 @@ Your Answer Here
 
 
 \answerbox{7em}{
-Your Answer Here
+The RMSE on training set is 1586.80.\\
+The RMSE on validation set is 1691.46.\\
+We can see that the result is much better than baseline because we have more feature and can get more parameters to learn.
 }
 
 
@@ -539,7 +602,9 @@ Your Answer Here
 
 
 \answerbox{10em}{
-Your Answer Here
+1. In Linear Regression, all the features may not in the same range. So, the weights cannot represent relative importance anytime. \\
+2. The normalization transforms all features in the data to a specific range, so then  we can compare features. To normalise a feature, we subtract its mean and divide by its l2-norm. \\
+3. No, it wont'. In Linear Regression, it is not sensitive to magnitude, the weights will keep the same because it is looking at proportional relationships.
 }
 
 
@@ -551,7 +616,18 @@ Your Answer Here
 
 
 \answerbox{15em}{
-Your Answer Here
+The result table: \\
+\begin{tabular}{rrrrrrrrr}
+\toprule
+     1 &      2 &      4 &       6 &      7 &     10 &     12 &     14 &     16 \\
+\midrule
+0.1156 & 0.0099 & 0.1341 & -0.0068 & 0.0594 & 0.0798 & 0.1291 & 0.0945 & 0.1618 \\
+\bottomrule
+\end{tabular}
+\\
+Site 16 is the most import site. Site 6 is the least import site. \\
+This result is same as the correlation coefficients for Site 17. In Question \ref{Q_EXPLORATORY}:\ref{CORRELATIONS}, the correlation between site 16 and site 17 is the highest: 0.78, while it between site 6 and 17 is the lowest: 0.58. \\
+So, we can get that in Linear Regression, if correlation coefficient for a feature and the label is higher, the feature will be more important. 
 }
 
 
@@ -563,7 +639,9 @@ Your Answer Here
 
 
 \answerbox{8em}{
-Your Answer Here
+The RMSE of kNN on training set is 1052.13.
+The RMSE of kNN on validation set is 1624.67. \\
+So, on training set, the result of KNN is much better than Linear Regression. While on validation set, the performance of KNN is very close to Linear Regression. Actually, KNN is a spatial algorithm while our dataset is not. So, KNN cannot find a generic function to do regression for our task.
 }
 
 
@@ -575,7 +653,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_5.jpg}
+\end{center}
 }
 
 
@@ -587,7 +667,7 @@ Your Image Here
 
 
 \answerbox{6em}{
-Your Answer Here
+From the image in Question 6:7, we can see that when k = 16, the KNN do best in validation set. And we can see when k increase, the generation ability of KNN is better.
 }
 
 
@@ -599,7 +679,9 @@ Your Answer Here
 
 
 \answerbox{40em}{
-Your Image Here
+\begin{center}
+\includegraphics[width=1.0\textwidth] {Figure/Figure_6.jpg}
+\end{center}
 }
 
 
@@ -611,7 +693,7 @@ Your Image Here
 
 
 \answerbox{6em}{
-Your Answer Here
+When depth is 8, the Decision Tree do best on validation set. As the value of the depth increase, the Decision Tree do better on training set. when depth=32, the loss on training set is close to 0. However, the performance on validation set is getting better at first, then beginning to drop. 
 }
 
 
@@ -623,7 +705,14 @@ Your Answer Here
 
 
 \answerbox{6em}{
-Your Answer Here
+The result of different models on testing set. \\
+\begin{tabular}{lrrrr}
+\toprule
+{} &  Baseline &      LR &     KNN &      DT \\
+\midrule
+losses &   6369.91 & 1606.99 & 1264.59 & 1146.16 \\
+\bottomrule
+\end{tabular}
 }
 
 
